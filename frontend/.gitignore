@@ -6,7 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+aiplan.md
+product_management_project_context.md   
 node_modules
 dist
 dist-ssr
