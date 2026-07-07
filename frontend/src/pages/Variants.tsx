@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
+import VariantImages from "./VariantImages";
 import api from "../services/api";
 import VariantAttributes from "./VariantAttributes";
 interface Variant {
@@ -83,7 +83,11 @@ const [selectedSku, setSelectedSku] =
     setPrice(String(variant.price));
     setStock(String(variant.stock));
   };
+  const [selectedImageVariantId, setSelectedImageVariantId] =
+  useState<number | null>(null);
 
+const [selectedImageSku, setSelectedImageSku] =
+  useState("");
   const handleDelete = async (id: number) => {
     try {
       await api.delete(`/variants/${id}`);
@@ -153,6 +157,27 @@ const [selectedSku, setSelectedSku] =
                 <button
   style={{ marginLeft: "10px" }}
   onClick={() => {
+    if (
+      selectedImageVariantId === variant.id
+    ) {
+      setSelectedImageVariantId(null);
+      return;
+    }
+
+    setSelectedImageVariantId(
+      variant.id
+    );
+
+    setSelectedImageSku(
+      variant.sku
+    );
+  }}
+>
+  Images
+</button>
+                <button
+  style={{ marginLeft: "10px" }}
+  onClick={() => {
     if (selectedVariantId === variant.id) {
       setSelectedVariantId(null);
       return;
@@ -169,6 +194,12 @@ const [selectedSku, setSelectedSku] =
           ))}
         </tbody>
       </table>
+      {selectedImageVariantId && (
+  <VariantImages
+    variantId={selectedImageVariantId}
+    sku={selectedImageSku}
+  />
+)}
       {selectedVariantId && (
   <VariantAttributes
     variantId={selectedVariantId}

@@ -1,5 +1,7 @@
 const productRoutes = require("./routes/productRoutes");
 const express = require("express");
+const variantImageRoutes = require("./routes/variantImageRoutes");
+
 const cors = require("cors");
 const typeRoutes = require("./routes/typeRoute");
 const variantRoutes = require("./routes/variantRoutes");
@@ -15,6 +17,8 @@ app.use(
   "/api/variant-attributes",
   variantAttributeRoutes
 );
+app.use("/api/variant-images", variantImageRoutes);
+
 app.use("/api/types", typeRoutes);
 app.use("/api/attributes", attributeRoutes);
 app.use("/api/type-attributes", typeAttributeRoutes);
